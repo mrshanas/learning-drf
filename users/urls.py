@@ -1,6 +1,15 @@
 from django.urls import path
-from .views import HelloView
+# from rest_framework.routers import SimpleRouter
+
+from .views import UserRegister
+
+# router = SimpleRouter()
+# router.register('', UserViewset)
+
+# urlpatterns = router.urls
+
+app_name = 'users'
 
 urlpatterns = [
-    path('', HelloView.as_view(), name='hello'),
+    path('signup', UserRegister.as_view(), name='create'),
 ]

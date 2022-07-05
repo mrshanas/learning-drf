@@ -28,6 +28,9 @@ INSTALLED_APPS = [
 
     # local
     'users',
+
+    # 3rd party
+    'drf_spectacular',
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -119,5 +122,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # App settings
 
 REST_FRAMEWORK = {
-
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }

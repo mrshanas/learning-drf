@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import (
-    AbstractUser,
-    BaseUserManager
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin
 )
 
 
@@ -50,7 +51,7 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 
-class User(AbstractUser):
+class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         verbose_name='email address',
         unique=True,
@@ -62,11 +63,14 @@ class User(AbstractUser):
     job_id = models.CharField(max_length=50, null=True)
     phone_no = models.PositiveIntegerField(null=True)
     updated_date = models.DateTimeField(auto_now_add=True)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    username = models.CharField(max_length=255)
 
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    # REQUIRED_FIELDS = ['username']
 
     def __str__(self):
         return self.username
